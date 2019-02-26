@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Real human</title>
+    <script src="https://www.google.com/recaptcha/api.js?render=%SITEKEY%"></script>
+    <script src="bundle.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-md-12">
+            <h1 class="display-3 text-uppercase">🤖 Real human</h1>
+            <figure class="highlight">
+<pre>
+<strong>Feature:</strong> Test If I am a human
+In order to check if I am a human
+As a robot
+I need to press the button which is doing captcha v3 test
+
+<i>@javascript</i>
+<strong>Scenario:</strong> Test captcha v3
+<strong>Given</strong> I am on "/realhuman/"
+<strong>When</strong> I press "checkIfIamAHuman"
+<strong>Then</strong> I should see "Yes, you are a human"
+</pre>
+            </figure>
+            <form method="post" action="realhuman.php">
+
+                <input type="hidden" name="recaptcha_response" id="recaptchaResponse"/>
+                <button id="checkIfIamAHuman" name="checkIfIamAHuman" class="btn btn-primary" disabled="true">Check if
+                    I am a human
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    grecaptcha.ready(function () {
+        grecaptcha.execute('%SITEKEY%', {action: 'iamahuman'}).then(function (token) {
+            var recaptchaResponse = document.getElementById('recaptchaResponse');
+            recaptchaResponse.value = token;
+            $('#checkIfIamAHuman').removeAttr('disabled');
+        });
+    });
+</script>
+
+</body>
+</html>
